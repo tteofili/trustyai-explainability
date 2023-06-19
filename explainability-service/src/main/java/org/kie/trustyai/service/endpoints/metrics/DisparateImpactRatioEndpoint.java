@@ -73,7 +73,7 @@ public class DisparateImpactRatioEndpoint implements MetricsEndpoint {
         final Dataframe dataframe;
         final Metadata metadata;
         try {
-            dataframe = dataSource.get().getDataframe(rawRequest.getModelId());
+            dataframe = dataSource.get().getDataframe(rawRequest.getModelId()).filterOutSyntheticRows();
             metadata = dataSource.get().getMetadata(rawRequest.getModelId());
         } catch (DataframeCreateException e) {
             LOG.error("No data available for model " + rawRequest.getModelId() + ": " + e.getMessage(), e);
